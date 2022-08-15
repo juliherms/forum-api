@@ -1,6 +1,6 @@
 package com.juliherms.forum.forum.service
 
-import com.juliherms.forum.forum.dto.NewTopicDTO
+import com.juliherms.forum.forum.dto.NewTopicForm
 import com.juliherms.forum.forum.dto.TopicView
 import com.juliherms.forum.forum.mapper.TopicViewMapper
 import com.juliherms.forum.forum.model.Topic
@@ -30,8 +30,8 @@ class TopicService(
         return topicViewMapper.map(topic)
     }
 
-    fun create(dto: NewTopicDTO) {
-        val topic = newTopicDTOMapper.map(dto)
+    fun create(form: NewTopicForm) {
+        val topic = newTopicDTOMapper.map(form)
         topic.id = topics.size.toLong() + 1
         topics = topics.plus(topic)
     }

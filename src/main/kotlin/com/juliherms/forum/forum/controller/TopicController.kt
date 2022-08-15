@@ -1,8 +1,7 @@
 package com.juliherms.forum.forum.controller
 
-import com.juliherms.forum.forum.dto.NewTopicDTO
+import com.juliherms.forum.forum.dto.NewTopicForm
 import com.juliherms.forum.forum.dto.TopicView
-import com.juliherms.forum.forum.model.Topic
 import com.juliherms.forum.forum.service.TopicService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -26,7 +25,7 @@ class TopicController(private val service: TopicService) {
     }
 
     @PostMapping
-    fun create(@RequestBody dto: NewTopicDTO) {
+    fun create(@RequestBody dto: NewTopicForm) {
         service.create(dto)
     }
 }
