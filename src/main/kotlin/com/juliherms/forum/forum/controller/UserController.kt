@@ -1,7 +1,5 @@
 package com.juliherms.forum.forum.controller
 
-import com.juliherms.forum.forum.dto.CourseView
-import com.juliherms.forum.forum.dto.NewCourseForm
 import com.juliherms.forum.forum.dto.NewUserForm
 import com.juliherms.forum.forum.dto.UserView
 import com.juliherms.forum.forum.service.UserService
