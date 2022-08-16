@@ -6,10 +6,7 @@ import com.juliherms.forum.forum.dto.NewUserForm
 import com.juliherms.forum.forum.dto.UserView
 import com.juliherms.forum.forum.service.UserService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.transaction.Transactional
 import javax.validation.Valid
@@ -17,6 +14,11 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/users")
 class UserController(private val service: UserService) {
+
+    @GetMapping
+    fun list(): List<UserView> {
+        return service.list()
+    }
 
     @PostMapping
     @Transactional

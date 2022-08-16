@@ -7,10 +7,7 @@ import com.juliherms.forum.forum.dto.TopicView
 import com.juliherms.forum.forum.service.CourseService
 import com.juliherms.forum.forum.service.TopicService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.transaction.Transactional
 import javax.validation.Valid
@@ -18,6 +15,11 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/courses")
 class CourseController(private val service: CourseService) {
+
+    @GetMapping
+    fun list(): List<CourseView> {
+        return service.list()
+    }
 
     @PostMapping
     @Transactional

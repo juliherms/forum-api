@@ -9,6 +9,7 @@ import com.juliherms.forum.forum.mapper.UserViewMapper
 import com.juliherms.forum.forum.model.User
 import com.juliherms.forum.forum.repository.UserRepository
 import org.springframework.stereotype.Service
+import java.util.stream.Collectors
 
 @Service
 class UserService(
@@ -19,6 +20,12 @@ class UserService(
 
     fun findById(id: Long): User {
        return  repository.getReferenceById(id)
+    }
+
+    fun list(): List<UserView> {
+        return repository.findAll().stream().map {
+                t -> userViewMapper.map(t)
+        }.collect(Collectors.toList())
     }
 
     fun create(newUserForm: NewUserForm): UserView {
