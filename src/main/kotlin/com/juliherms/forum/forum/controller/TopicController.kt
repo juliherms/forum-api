@@ -6,6 +6,7 @@ import com.juliherms.forum.forum.dto.UpdateTopicForm
 import com.juliherms.forum.forum.service.TopicService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -32,11 +33,13 @@ class TopicController(private val service: TopicService) {
      * http://localhost:8080/topics?courseName=test
      * http://localhost:8080/topics?size=5
      * http://localhost:8080/topics?size=5&page=1
+     * http://localhost:8080/topics?sort=id,desc
+     * http://localhost:8080/topics?sort=id,desc&sort=title
      */
     @GetMapping
     fun list(
         @RequestParam(required = false) courseName: String?,
-        @PageableDefault(size = 5) pageable: Pageable
+        @PageableDefault(size = 5, sort = ["createdDate"], direction = Sort.Direction.DESC) pageable: Pageable
     ): Page<TopicView> {
        return service.list(courseName,pageable)
     }
