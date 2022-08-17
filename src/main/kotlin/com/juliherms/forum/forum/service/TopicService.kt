@@ -1,6 +1,7 @@
 package com.juliherms.forum.forum.service
 
 import com.juliherms.forum.forum.dto.NewTopicForm
+import com.juliherms.forum.forum.dto.TopicByCategoryDTO
 import com.juliherms.forum.forum.dto.TopicView
 import com.juliherms.forum.forum.dto.UpdateTopicForm
 import com.juliherms.forum.forum.exception.NotFoundException
@@ -60,5 +61,9 @@ class TopicService(
 
     fun delete(id: Long) {
        repository.deleteById(id)
+    }
+
+    fun report(): List<TopicByCategoryDTO> {
+        return repository.report()
     }
 }

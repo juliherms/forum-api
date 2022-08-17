@@ -1,6 +1,7 @@
 package com.juliherms.forum.forum.controller
 
 import com.juliherms.forum.forum.dto.NewTopicForm
+import com.juliherms.forum.forum.dto.TopicByCategoryDTO
 import com.juliherms.forum.forum.dto.TopicView
 import com.juliherms.forum.forum.dto.UpdateTopicForm
 import com.juliherms.forum.forum.service.TopicService
@@ -70,5 +71,10 @@ class TopicController(private val service: TopicService) {
     @Transactional
     fun delete(@PathVariable id: Long){
         service.delete(id)
+    }
+
+    @GetMapping("/report")
+    fun report(): List<TopicByCategoryDTO>{
+        return service.report()
     }
 }
