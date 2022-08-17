@@ -4,6 +4,9 @@ import com.juliherms.forum.forum.dto.NewTopicForm
 import com.juliherms.forum.forum.dto.TopicView
 import com.juliherms.forum.forum.dto.UpdateTopicForm
 import com.juliherms.forum.forum.service.TopicService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -24,11 +27,18 @@ import javax.validation.Valid
 @RequestMapping("/topics")
 class TopicController(private val service: TopicService) {
 
+    /**
+     * http://localhost:8080/topics
+     * http://localhost:8080/topics?courseName=test
+     * http://localhost:8080/topics?size=5
+     * http://localhost:8080/topics?size=5&page=1
+     */
     @GetMapping
     fun list(
-        @RequestParam(required = false) courseName: String?
-    ): List<TopicView> {
-       return service.list(courseName)
+        @RequestParam(required = false) courseName: String?,
+        @PageableDefault(size = 5) pageable: Pageable
+    ): Page<TopicView> {
+       return service.list(courseName,pageable)
     }
 
     @GetMapping("/{id}")
