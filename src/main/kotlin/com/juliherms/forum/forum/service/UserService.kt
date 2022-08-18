@@ -38,7 +38,8 @@ class UserService(
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        val author = repository.findByEmail(username) ?: throw  RuntimeException()
+        //TODO create a custom exception
+        val author = repository.findByEmail(username) ?: throw RuntimeException()
         return UserDetail(author)
     }
 }
