@@ -8,7 +8,10 @@ import com.juliherms.forum.forum.mapper.NewUserMapper
 import com.juliherms.forum.forum.mapper.UserViewMapper
 import com.juliherms.forum.forum.model.User
 import com.juliherms.forum.forum.repository.UserRepository
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
+import java.lang.RuntimeException
 import java.util.stream.Collectors
 
 @Service
@@ -16,7 +19,7 @@ class UserService(
     private val repository: UserRepository,
     private val newUserMapper: NewUserMapper,
     private val userViewMapper: UserViewMapper
-) {
+): UserDetailsService {
 
     fun findById(id: Long): User {
        return  repository.getReferenceById(id)
@@ -32,5 +35,10 @@ class UserService(
         val user = newUserMapper.map(newUserForm)
         repository.save(user)
         return userViewMapper.map(user)
+    }
+
+    override fun loadUserByUsername(username: String?): UserDetails {
+        val author = repository.findByEmail(username) ?: throw  RuntimeException()
+        return UserDetail(author)
     }
 }

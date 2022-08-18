@@ -8,5 +8,7 @@ data class NewUserForm(
     @field:Size(min = 5, max = 100)
     val name: String,
     @field:NotEmpty
-    val email: String
+    val email: String,
+    @field:NotEmpty
+    val password: String
 )

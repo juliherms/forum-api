@@ -9,7 +9,8 @@ class NewUserMapper: Mapper<NewUserForm, User> {
     override fun map(t: NewUserForm): User {
         return User(
             email = t.email,
-            name = t.name
+            name = t.name,
+            password = t.password
         )
     }
 }
