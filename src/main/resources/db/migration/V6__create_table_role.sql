@@ -3,3 +3,5 @@ create table tb_role (
     name varchar(255) NOT NULL,
     primary key (id)
 );
+
+insert into tb_role(id,name) values (1,'READ_WRITE');
