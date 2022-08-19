@@ -10,6 +10,7 @@ import com.juliherms.forum.forum.model.User
 import com.juliherms.forum.forum.repository.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.lang.RuntimeException
 import java.util.stream.Collectors
@@ -33,6 +34,7 @@ class UserService(
 
     fun create(newUserForm: NewUserForm): UserView {
         val user = newUserMapper.map(newUserForm)
+        user.password = BCryptPasswordEncoder().encode(newUserForm.password)
         repository.save(user)
         return userViewMapper.map(user)
     }
