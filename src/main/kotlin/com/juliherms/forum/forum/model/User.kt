@@ -1,5 +1,6 @@
 package com.juliherms.forum.forum.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -9,5 +10,10 @@ data class User(
     val id: Long? = null,
     val name: String,
     val email: String,
-    val password: String
+    val password: String,
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name="TB_USER_ROLE")
+    val role: List<Role> = mutableListOf()
 )

@@ -1,5 +1,6 @@
 package com.juliherms.forum.forum.model
 
+import org.springframework.security.core.GrantedAuthority
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -12,4 +13,6 @@ data class Role(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val name: String
-)
+) : GrantedAuthority {
+    override fun getAuthority() = name
+}
