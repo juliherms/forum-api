@@ -10,10 +10,14 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.stereotype.Component
 import java.util.Date
 
+/**
+ * This class responsible to configure JWT Token
+ */
 @Component
 class JWTUtil(
     private val userService: UserService
 ) {
+
     private val expiration: Long = 900000
 
     @Value("\${jwt.secret}")

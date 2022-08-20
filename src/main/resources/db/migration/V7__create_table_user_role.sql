@@ -6,5 +6,3 @@ create table tb_user_role (
   foreign key(user_id) references tb_user(id),
   foreign key(role_id) references tb_role(id)
 );
-
-insert into tb_user_role(id,user_id,role_id) values (1,1,1);

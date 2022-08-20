@@ -12,6 +12,9 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+/**
+ * This class responsible to represents JWT Filter to authenticate user
+ */
 class JWTLoginFilter(
     private val authManager: AuthenticationManager,
     private val jwtUtil: JWTUtil
@@ -34,5 +37,4 @@ class JWTLoginFilter(
         val token = jwtUtil.generateToken(user.username, user.authorities)
         response?.addHeader("Authorization", "Bearer $token")
     }
-
 }

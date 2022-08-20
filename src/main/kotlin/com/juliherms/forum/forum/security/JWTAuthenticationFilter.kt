@@ -7,6 +7,9 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+/**
+ * This class responsible to check authenticated token
+ */
 class JWTAuthenticationFilter(private val jwtUtil: JWTUtil) : OncePerRequestFilter() {
 
     override fun doFilterInternal(

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.filter.OncePerRequestFilter
 
 
 @Configuration
@@ -25,7 +26,7 @@ class SecurityConfiguration (
     @Bean
     fun filterChain(http: HttpSecurity) : SecurityFilterChain {
         http
-            .csrf().disable()
+            .csrf().disable()//disable cross site request forgery attack
             .authorizeHttpRequests()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.POST,"/users").permitAll()
@@ -37,22 +38,23 @@ class SecurityConfiguration (
             .anyRequest()
             .authenticated()
             .and()
-            .addFilterBefore(
+            .addFilterBefore( //this filter responsible to verify authentication
                 JWTLoginFilter(authManager = configuration.authenticationManager, jwtUtil = jwtUtil),
                 UsernamePasswordAuthenticationFilter::class.java
             )
 
-        http.addFilterBefore(
+        http.addFilterBefore(//this filter responsible to validate authentication
             JWTAuthenticationFilter(jwtUtil = jwtUtil),
             UsernamePasswordAuthenticationFilter::class.java
         )
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-        return  http.build()
+        return http.build()
     }
 
-    fun encoder(): PasswordEncoder? {
+    @Bean
+    fun passwordEncoder(): PasswordEncoder? {
         return BCryptPasswordEncoder()
     }
 }
