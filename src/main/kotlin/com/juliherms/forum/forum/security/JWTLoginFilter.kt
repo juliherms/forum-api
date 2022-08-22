@@ -34,7 +34,7 @@ class JWTLoginFilter(
         authResult: Authentication?
     ) {
         val user = (authResult?.principal as UserDetails)
-        val token = jwtUtil.generateToken(user.username, user.authorities)
+        val token = jwtUtil.generateToken(user.username, user.authorities) //pass authorities for access control
         response?.addHeader("Authorization", "Bearer $token")
     }
 }
