@@ -1,1 +1,1 @@
-alter table tb_user add column password text;
+ALTER TABLE tb_user ADD COLUMN password text;
